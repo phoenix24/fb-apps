@@ -1,0 +1,62 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml">
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}Bet a Match!{% endblock %}</title>
+    <meta name="description" content="Bet a Match">
+    <link type="text/css" rel="stylesheet" href="/main.css">
+    <script src="http://connect.facebook.net/en_US/all.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script>
+    <script src="/main.js"></script>
+    <script>
+         
+      {# async loading of google analytics #}
+      {# async loading of facebook js sdk #}
+       $(document).ready(function() {
+         
+         var username = {{ js_conf }};
+         username = username["userName"];
+         
+         facebookInit({{ js_conf }});
+         
+         function facebookInit(config) {
+        		Config = config;
+
+        		FB.init({
+        			appId: Config.appId,
+        			xfbml: true,
+        		});
+        
+        		FB.Event.subscribe('auth.sessionChange', function (response) {
+        			if ((Config.userIdOnServer && !response.session) || 
+        				Config.userIdOnServer != response.session.uid) {
+        				goHome();
+        			}
+        		});
+        		FB.Canvas.setAutoResize();
+        	}
+       });
+    </script>
+  </head>
+  <body>
+    <div id="doc">
+      <div class="hd">
+        <div class="like-button">like button</div>
+      </div>
+
+      {% if message %}
+        <div class="message {{ message.type }}">{{ message.content }}</div>
+      {% endif %}
+
+      <div class="bd">
+        {% block body %}{% endblock %}
+      </div><!-- .bd -->
+
+      <div class="ft">
+      </div>
+    </div>
+
+    <div id="fb-root"></div>
+  </body>
+</html>

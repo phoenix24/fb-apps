@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div id="runs">
+    <div class="title"></div>
+    <div class="center picktitle">
+        <a href="/schedule">schedule</a>
+        <a href="/leaderboard">leaderboard</a>
+        <p class="ptitle">Cric-Quotient!</p>
+        <p class="psubtitle">Bet on the team you think will win the Match!</p>
+    </div>
+    
+    <form class="bets" action="/bet" method="post">
+      <div style="display: none">
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}">
+      </div>
+      <div class="center">
+      	<p>19th February</p>
+      </div>
+      <div class="center">
+		<div class="matchcontainer">
+			<div class="time">
+				<p>time remaining</p>
+			</div>
+			<div class="team">
+				<input type="radio" id="radio1" name="match1" value="india" checked="checked"/>
+				<label for="radio1">India</label>
+			</div>
+			<div class="vs"></div>
+			<div class="team">
+				<input type="radio" id="radio2" name="match1" value="bangladesh"/>
+				<label for="radio2">Bangladesh</label>
+			</div>
+			<div class="trend">
+				<p>public opinion</p>
+			</div>
+			<div class="info">
+				<p>14:30 IST at Shree Bangla National Stadium, Mirpur</p>
+			</div>
+		</div>
+		<div class="matchcontainer">
+			<div class="time">
+				<p>time remaining</p>
+			</div>
+			<div class="team">
+				<input type="radio" id="radio3" name="match2" value="australia" />
+				<label for="radio3">Australia</label>
+			</div>
+			<div class="vs"></div>
+			<div class="team">
+				<input type="radio" id="radio4" name="match2" value="pakistan" checked="checked"/>
+				<label for="radio4">Pakistan</label>
+			</div>
+			<div class="trend">
+				<p>public opinion</p>
+			</div>
+			<div class="info">
+				<p>16:30 IST at Shree Bangla National Stadium, Mirpur</p>
+			</div>
+		</div>
+		<div class="clear"></div>
+      </div>
+      
+      <div class="message">
+	     <p class="error oops">oops!</p>
+	  </div>
+      
+      <div class="center champion">
+		<p>finals, 2nd april</p>
+		<p>who do you think will lift the worldcup ?</p>
+		<ul>
+			<li>tm1</li>
+			<li>tm2</li>
+			<li>tm3</li>
+			<li>tm4</li>
+			<li>tm5</li>
+			<li>tm6</li>
+			<li>tm7</li>
+			<li>tm8</li>
+			<li>tm9</li>
+			<li>tm10</li>
+			<li>tm11</li>
+			<li>tm12</li>
+			<li>tm13</li>
+			<li>tm14</li>
+		</ul>
+      </div>
+      
+      <div class="center">
+        <input type="submit" value="Bet!">
+      </div>
+    </form>
+    
+    <div class="friends"></div>
+</div>
+{% endblock %}

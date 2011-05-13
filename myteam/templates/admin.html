@@ -1,0 +1,101 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml">
+  <head>
+    <meta charset="utf-8">
+    <title>
+      {% block title %}Admin{% endblock %}
+    </title>
+    <script src="http://connect.facebook.net/en_US/all.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script>
+    <script src="/admin.js"></script>
+    <script>
+       var username = {{ js_conf }};
+       username = username["userName"];
+         
+      {# async loading of facebook js sdk #}
+       $(document).ready(function() {
+         facebookInit({{ js_conf }});
+         
+         function facebookInit(config) {
+        		Config = config;
+
+        		FB.init({
+        			appId: Config.appId,
+        			xfbml: true,
+        		});
+        	
+        		FB.Event.subscribe('auth.sessionChange', function (response) {
+        			if ((Config.userIdOnServer && !response.session) || 
+        				Config.userIdOnServer != response.session.uid) {
+        			}
+        		});
+        	}
+         
+       });
+    </script>
+  </head>
+  <body>
+    {% if logged_in_user %}
+      <div class="hd">
+          <div id="user-info">hello admin user</div>
+      </div>
+      
+    <form action="/admin" method="post">
+    	<select id="team1" name="team1">
+    		<option value="india">india</option>
+    		<option value="england">england</option>
+    		<option value="safrica">safrica</option>
+    		<option value="srilanka">sri lanka</option>
+    		<option value="australia">australia</option>
+    		<option value="bangladesh">bangladesh</option>
+    		<option value="newzealand">new zealand</option>
+    	</select>
+    	<b> VS </b>
+    	<select id="team2" name="team2">
+    		<option value="india">india</option>
+    		<option value="england">england</option>
+    		<option value="safrica">safrica</option>
+    		<option value="srilanka">sri lanka</option>
+    		<option value="australia">australia</option>
+    		<option value="bangladesh">bangladesh</option>
+    		<option value="newzealand">new zealand</option>
+    	</select>
+   		<input type="text" id="date" name="date" value="date">
+   		<input type="text" id="time" name="time" value="time">
+   		<input type="text" id="location" name="location" value="location">
+   		<input type="text" id="result" name="result" value="result" disabled="disabled">
+    	<input type="submit" value="create">
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" style="display: none">
+    </form>
+
+      <div class="bd">
+      	<div class="users">
+      		<p>users : {{ users_count }}</p>
+      	</div>
+      	<div class="matches">
+      		<p>matches</p>
+	      	<table>
+		      	<tr>
+		      		<td>action </td>
+		      		<td>team #1</td>
+		      		<td>team #2</td>
+		      		<td>result!</td>
+		      	</tr>
+		        {% for match in matches %}
+		        <tr>
+		        	<td> <a href="/admin/update/{{ match.key }}">update</a> </td>
+		        	<td> {{ match.team1 }} </td>
+		        	<td> {{ match.team2 }} </td>
+		        	<td> {{ match.result }} </td>
+		        </tr>
+		        {% endfor %}
+	      	</table>
+      	</div>
+      </div><!-- .bd -->
+
+      <div id="fb-root"></div>
+    {% endif %}
+    
+  </body>
+</html>

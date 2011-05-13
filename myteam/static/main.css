@@ -1,0 +1,302 @@
+/**
+ * Base
+ */
+body {
+  font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #000;
+  font-size: 15px;
+  background: #fff;
+  text-align: left;
+/*  overflow: hidden;*/
+}
+a {
+  color: #000000;
+  font-size: 12px;
+  text-decoration: none;
+}
+a:hover {
+  color: #2fa600;
+  cursor: pointer;
+  text-decoration: underline;
+}
+img {
+  border: none;
+}
+h1, h2, h3, h4, h5, h6, dt, p {
+  font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
+  margin: 0;
+  padding: 0;
+}
+ul, li {
+	list-style: none;
+	list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+
+/**
+ * General Styles
+ */
+.clear {
+	clear: both;
+}
+.hidden {
+  display: none;
+}
+ul.choices li {
+	margin: 0 10px;
+	float: left;
+	border: 4px #ffffff solid;
+	background-color: #ffffff;
+}
+ul.choices li.selected,
+ul.choices li:hover {
+	cursor: pointer;
+	border: 4px red solid;
+	background-color: red;
+}
+ul.choices li.first {
+  margin-left: 10px;
+  border: 4px #ffffff solid;
+}
+ul.choices li div {
+  width : 150px;
+  height : 150px;
+  margin-left: 10px;
+}
+ul.choices li.middle:hover {
+	cursor: auto;
+	border: 4px #ffffff solid;
+	background-color: #ffffff;
+}
+ul.choices li.last {
+  margin-right: 0px;
+}
+.awesome.green {
+  background-color: #1d4088 !important;
+  font-size: 20px !important;
+  padding: 10px 15px !important;
+}
+.rfloat {
+  float: right;
+}
+
+
+/**
+ * Document
+ */
+#doc {
+  width: 758px;
+  margin: 0 auto;
+}
+
+
+/**
+ * Header
+ */
+.hd {
+  margin: 0px;
+  padding: 0px;
+}
+.hd a,
+.hd a:hover {
+  color: #666;
+}
+.hd .logo,
+.hd .logo:hover {
+  font-family: "Arial Black", Arial, serif;
+  font-size: 30px;
+  text-decoration: none;
+  color: #000;
+}
+
+/**
+ * Messages
+ */
+.message {
+  height: 50px;
+  margin: 0px;
+  padding: 0 10px;
+  font-size: 13px;
+  font-weight: bold;
+}
+.message.error, .message .oops, .message .doops, .message .intro {
+  background-color: #e8352d;
+  text-align: center;
+  padding: 5px 0;
+  color: #fff;
+  display: none;
+}
+.message.success {
+  background-color: #79ff69;
+  color: #333;
+}
+
+/**
+ * Main Body
+ */
+.bd {
+  min-height: 540px;
+}
+/**
+ * Footer
+ */
+.ft {
+  color: #333;
+  padding: 5px 10px;
+  font-size: 10px;
+}
+.ft a {
+  font-weight: bold;
+}
+
+
+/**
+ * Welcome Page
+ */
+.promo {
+	background: url("/welcome-pg-final1.jpg");
+}
+.welcome, .promo {
+  border: none;
+	cursor: pointer;
+}
+.title, .title2 {
+	height: 150px;
+	text-align: center;
+	margin: -70px 0 0px 110px;
+	background: url("/title.png") no-repeat scroll 0 0 transparent;
+}
+.title2 {
+    background: url("/title2.png") no-repeat scroll 0 0 transparent;
+}
+/**
+ * Runs Page
+ */ 
+#runs {
+  min-height: 540px;
+  background: #ffffff url("/bg-pattern.jpg");
+}
+.center {
+  width: 100%;
+  padding: 0;
+  margin: 10px auto;
+  text-align: center;
+}
+.like-button {
+  text-align: center;
+}
+.close-button {
+  width: 16px;
+  height: 16px;
+  z-index: 100;
+  cursor: pointer;
+  margin: -25px 0 0 150px;
+}
+.secretmsg {
+	padding: 60px 0 10px 0;
+	background: url("/secret-message2.png") no-repeat;
+	margin: 10px 0 0 170px;
+	width: 350px;
+}
+.close-button img {
+  margin: 0 0 0 -5px;
+}
+/**
+ * Friends List;
+ */
+.friends {
+  width: 705px;
+  height: 30px;
+  margin: 10px 0;
+}
+.friends li.run {
+    -moz-border-radius: 4px 4px 4px 4px;
+    background: none repeat scroll 0 0 #CCCCFF;
+    border: 1px solid #6699CC;
+    float: left;
+    margin: 0 7px 7px 0;
+    padding: 5px;
+    width: 150px;
+}
+.friends li.run:hover {
+	cursor: pointer;
+  background: #6699cc;
+  border: 1px solid #3366cc;
+}
+.friends li.run a {
+  width: 80px;
+  float: left;
+  margin: 0 5px;
+  color: #000000;
+  text-align: left;
+  word-wrap: break-word;
+}
+.friends li.run:hover a {
+  color: #ffffff;
+  text-decoration: none;
+}
+.friends li.run .pic {
+	float: left;
+	padding: 3px;
+	border: 1px solid #6699CC;
+  vertical-align: middle;
+}
+.friends li.run:hover .pic {
+  border: 1px solid #ccccff;
+}
+.friends li.clicked {
+  cursor: pointer;
+  background: #3366cc;
+  border: 1px solid #333399;
+}
+.friends li.clicked a {
+  color: #FFFFFF;
+}
+.picktitle {
+	width: 100%;
+	text-align: center;
+	font-weight: bold;
+}
+.picktitle .ptitle {
+	color: #EC008C;
+	font-size: 13px;
+}
+.picktitle .psubtitle {
+}
+.rating .subtitle {
+	font-weight: bold;
+}
+.rating .label {
+	font-size: 35px;
+  font-weight: bold;
+}
+.rating .status {
+  font-weight: normal;
+}
+.rating .rate {
+  font-size: 200px;
+  line-height: 200px;
+}
+.rating .rating0 {
+	color: #ED1C24;
+}
+.rating .rating14 {
+  color: #39B54A;
+}
+.rating .rating50 {
+  color: #EC008C;
+}
+.invite {
+	margin: 50px 0 0 0;
+}
+.invite .label {
+  font-weight: bold;
+}
+.invite .text {
+  font-size: 17px;
+}
+

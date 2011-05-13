@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Ratings!{% endblock %}
+
+{% block body %}
+<div id="runs">
+    <div class="title2"></div>
+    
+    <div class="center rating">
+	    {{ values.match1 }} {{ values.match2 }}
+        <p class="subtitle">Your current rating is</p>
+        <p class="rate {{ rating.rating_color }}">{{ rating.rating }}</p>
+        <p class="label">{{ rating.rating_label }}</p>
+        <p class="status">{{ rating.rating_status }}</p>
+    </div>
+    <div class="center invite">
+        <p class="text">What are you waiting for!</p>
+        <p class="label">Invite more friends and share the excitement.</p>
+        <div class="center">
+          <input class="awesome green" type="submit" value="Invite!">
+        </div>
+    </div>
+</div>
+{% endblock %}
