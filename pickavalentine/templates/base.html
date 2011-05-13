@@ -1,0 +1,111 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml">
+  <head>
+    <meta charset="utf-8">
+    <title>
+      {% block title %}Welcome{% endblock %} &mdash; Pick Your Valentines
+    </title>
+    <meta name="description" content="Pick Your Valentines">
+    <link type="text/css" rel="stylesheet" href="/awesome-buttons.css">
+    <link type="text/css" rel="stylesheet" href="/main.css">
+	<link type="text/css" rel="stylesheet" href="/jquery.facebook.multifriend.select.css" />
+    <script src="http://connect.facebook.net/en_US/all.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+    <script type="text/javascript" src="/jquery.facebook.multifriend.select.js"></script> 
+    <script>
+       var username = {{ js_conf }};
+       username = username["userName"];
+         
+      {# async loading of facebook js sdk #}
+       $(document).ready(function() {
+         facebookInit({{ js_conf }});
+         
+         function facebookInit(config) {
+        		Config = config;
+
+        		FB.init({
+        			appId: Config.appId,
+        			xfbml: true,
+        			channelUrl: window.location.protocol + '//' + window.location.host + '/channel.html'
+        		});
+        	  
+        		FB.Event.subscribe('auth.sessionChange', function (response) {
+        			if ((Config.userIdOnServer && !response.session) || 
+        				Config.userIdOnServer != response.session.uid) {
+        				goHome();
+        			}
+        		});
+//        	    FB.Event.subscribe('auth.login', function(response) {
+//        	        window.location.reload();
+//        	        loadfriends();
+//        	    });
+
+        		FB.Canvas.setAutoResize();
+
+        		FB.getLoginStatus(function(response) {
+        		    if (response.session && $("#jfmfs-container").size() != 0) {
+        			  FB.api('/me', function(response) {
+        			      $("#jfmfs-container").jfmfs({ max_selected: 3, max_selected_message: ""});
+        			      $("#jfmfs-container").bind("jfmfs.friendload.finished", function() { 
+        			          //console.log("finished loading!"); 
+        			      });
+        			      $("#jfmfs-container").bind("jfmfs.selection.changed", function(e, data) { 
+        			          //console.log("changed", data);
+        			      });                     
+        			      $("#logged-out-status").hide();
+        			      $("#show-friends").show();
+        			  });
+        		    }
+        		});
+
+        		// ensure we're always running on apps.facebook.com
+        		if (window == top) { goHome(); }
+        	}
+
+        	function goHome() {
+        	  top.location = 'http://apps.facebook.com/' + Config.canvasName + '/';
+        	}
+         
+       });
+    </script>
+    <script src="/main.1.js"></script>
+  </head>
+  <body>
+    <div id="doc">
+      <div class="hd">
+        {% if logged_in_user %}
+          <div id="user-info"></div>
+        {% endif %}
+        <div class="like-button">
+          <iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fapps.facebook.com%2Fpickavalentine%2F&amp;layout=standard&amp;show_faces=true&amp;width=300&amp;action=like&amp;font=lucida+grande&amp;colorscheme=light&amp;height=35" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:400px; height:30px;" allowTransparency="true"></iframe>
+        </div>
+      </div>
+
+      {% if message %}
+        <div class="message {{ message.type }}">{{ message.content }}</div>
+      {% endif %}
+
+      <div class="bd">
+        {% block body %}{% endblock %}
+      </div><!-- .bd -->
+
+      <div class="ft">
+      </div>
+    </div>
+
+    <div id="fb-root"></div>
+    
+      {# async loading of google analytics #}
+		<script type="text/javascript">
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-21093333-1']);
+		  _gaq.push(['_trackPageview']);
+
+		  (function() {
+		    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+		</script>
+  </body>
+</html>
