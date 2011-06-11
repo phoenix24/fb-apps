@@ -222,14 +222,13 @@ class WelcomeHandler(BaseHandler):
         if self.user: # and self.user.has_picked() == 0:
             friends = {}
 #            friends = self.user.get_friends()
-
-            self.render(u'pick',
-                friends=friends,
-            )
+            self.render(u'pick', friends=friends,)
+			
         elif self.user and self.user.has_picked() != 0:
             self.redirect(u'/user')
+			
         else:
-            self.render(u'welcome')
+            self.render(u'pick')
 
 
 class PickHandler(BaseHandler):
@@ -267,19 +266,19 @@ class PickHandler(BaseHandler):
                 date=date,
             )
             pick.put()
-
 #            self.set_message(type=u'success', content=u'Added your pick. ')
+
         except PickException, e:
             self.set_message(type=u'error', content=unicode(e))
+			
         except KeyError:
-            self.set_message(type=u'error',
-                content=u'Yo! take a pick.')
+            self.set_message(type=u'error', content=u'Yo! take a pick.')
+			
         except ValueError:
-            self.set_message(type=u'error',
-                content=u'Yo! take a pick.')
+            self.set_message(type=u'error', content=u'Yo! take a pick.')
+			
         except Exception, e:
-            self.set_message(type=u'error',
-                content=u'Unknown error occured. (' + unicode(e) + u')')
+            self.set_message(type=u'error', content=u'Unknown error occured. (' + unicode(e) + u')')
             
         self.redirect(u'/user')
 
