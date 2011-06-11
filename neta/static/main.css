@@ -41,7 +41,7 @@ ul, li {
  * General Styles
  */
 .clear {
-	clear: both;
+  clear: both;
 }
 .hidden {
   display: none;
@@ -52,10 +52,10 @@ ul, li {
 }
 .choice .text {
   color: #A0A0A0;
-  margin: 20px 0 0 0;
   width: 160px;
   font-size: 12px;
   padding: 7px 3px;
+  margin: 20px 0 0 0;
   border: 1px solid #CC3366;
 }
 .choice .seltext {
@@ -64,34 +64,17 @@ ul, li {
 .choice img {
   margin-bottom: -10px;
 }
-.choice .choicelft {
-	height: 50px;
-	float: left;
-}
-.choice .choicert {
-	height: 50px;
-	float: left;
-	margin: 0 0 0 3px;
-}
 ul.choices li {
-	margin: 0 10px;
 	float: left;
-}
-ul.choices li.first {
-  margin-left: 10px;
-}
-ul.choices li.last {
-  margin-right: 0px;
+	padding: 10px;
+	margin: 5px 5px 5px 5px;
+	border: 1px solid #000000;
 }
 .awesome.green {
   background-color: #1d4088 !important;
   font-size: 20px !important;
   padding: 10px 15px !important;
 }
-.rfloat {
-  float: right;
-}
-
 
 /**
  * Document

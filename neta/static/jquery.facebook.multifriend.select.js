@@ -124,17 +124,17 @@
                 
               // if the element is being selected, test if the max number of items have
               // already been selected, if so, just return
-              if(!$(this).hasClass("selected") && maxSelectedEnabled() &&
-                $(".jfmfs-friend.selected").size() >= settings.max_selected && settings.max_selected != 1) {
-                     $(".message .oops").fadeIn(800);
-                     return;
-                }
+//              if(!$(this).hasClass("selected") && maxSelectedEnabled() &&
+//                $(".jfmfs-friend.selected").size() >= settings.max_selected && settings.max_selected != 1) {
+//                     $(".message .oops").fadeIn(800);
+//                     return;
+//                }
                 
                 //hide oops!
-                $(".message .oops").fadeOut(800);
+//                $(".message .oops").fadeOut(800);
                 
                 //hide intro
-                $(".message .intro").fadeOut(800);
+//                $(".message .intro").fadeOut(800);
                     
                 // if the max is 1 then unselect the current and select the new
                 if(settings.max_selected == 1) {
