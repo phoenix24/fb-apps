@@ -15,7 +15,7 @@
         <li class="first">
           <div class="choicert">
             <img class="usrimg" src="/girl.gif">
-			<input type="radio" name="netaname" value="sibal" /><p class="netaname">sibal</p>
+			<p class="netaname"><input type="radio" name="netaname" value="sibal" />sibal</p>
             <input name="choiceid0" class="hidden netaid" type="hidden" value="">
           </div>
           <div class="clear"></div>
@@ -23,7 +23,7 @@
         <li>
           <div class="choicert">
             <img class="usrimg" src="/boy.gif">
-			<input type="radio" name="netaname" value="manmohan" /><p class="netaname">man mohan</p>
+			<p class="netaname"><input type="radio" name="netaname" value="manmohan" checked />man mohan</p>
             <input name="choiceid1" class="hidden netaid" type="hidden" value="">
           </div>
           <div class="clear"></div>
@@ -31,7 +31,7 @@
         <li class="last">
           <div class="choicert">
             <img class="usrimg" src="/boy.gif">
-			<input type="radio" name="netaname" value="rahul" /><p class="netaname">rahul</p>
+			<p class="netaname"><input type="radio" name="netaname" value="rahul" />rahul</p>
             <input name="choiceid2" class="hidden netaid" type="hidden" value="">
           </div>
           <div class="clear"></div>
@@ -47,22 +47,6 @@
      </div>
       
       <div id="jfmfs-container"></div>
-      
-      {% if friends %}
-      <div class="center friends">
-        <ul>
-        {% for run in friends %}
-        <li class="run" id="{{ run.id }}">
-            <img class="pic" height="50" width="50" src="{{ run|get_picture }}" alt="{{ run|get_name }}">
-            <a class="name" userid="{{ run.id }}" username="{{ run|get_name }}" href="#" alt="{{ run.name|escape }}">
-              {{ run|get_name }}
-            </a>
-        </li>
-        {% endfor %}
-        </ul>
-        <div class="clear"></div>
-      </div>
-      {% endif %}
 	  
       <div class="center secretmsg">
         <input class="awesome green" type="submit" value="Pick!">
