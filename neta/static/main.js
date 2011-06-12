@@ -27,12 +27,26 @@ $(document).ready(function() {
   $("form.picks input.awesome").click(function() {
   
 	var fs = $("#jfmfs-container").data('jfmfs');
-	fi = fs.getSelectedIds();
+	var fi = fs.getSelectedIdsAndNames();
+	
+	var friends = "";
+	var friend_ids = "";
+	
+	for (i = 0; i < fi.length; i++ ) {
+		friends = friends + "" + fi[i].name + ";";
+		friend_ids = friend_ids + "" + fi[i].id + ";";
+		console.log("id: " + fi[i].id + ", name: " + fi[i].name); 
+	}
+	
+	$("#friendlst").val(friends);
+	$("#friendidlst").val(friend_ids);
+	
+	console.log("id: " + $("#friendidlst").val()); 
+	console.log("names: " + $("#friendlst").val()); 
 	
 	if (fi.length == 0) {
 		$(".message .doops").fadeIn(800);
 	} else {
-	/*
 		FB.ui({
 			 method: 'feed',
 			 name: username + " just made 3 picks from friends for a Valentine date.",
@@ -50,8 +64,7 @@ $(document).ready(function() {
 			//       alert('Post was not published.');
 			//     }
 		});
-		*/
-		   $("form.picks").submit();
+//		   $("form.picks").submit();
 	}
 	return false;
   });

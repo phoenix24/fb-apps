@@ -16,7 +16,6 @@
           <div class="choicert">
             <img class="usrimg" src="/girl.gif">
 			<p class="netaname"><input type="radio" name="netaname" value="sibal" />sibal</p>
-            <input name="choiceid0" class="hidden netaid" type="hidden" value="">
           </div>
           <div class="clear"></div>
         </li>
@@ -24,7 +23,6 @@
           <div class="choicert">
             <img class="usrimg" src="/boy.gif">
 			<p class="netaname"><input type="radio" name="netaname" value="manmohan" checked />man mohan</p>
-            <input name="choiceid1" class="hidden netaid" type="hidden" value="">
           </div>
           <div class="clear"></div>
         </li>
@@ -32,7 +30,6 @@
           <div class="choicert">
             <img class="usrimg" src="/boy.gif">
 			<p class="netaname"><input type="radio" name="netaname" value="rahul" />rahul</p>
-            <input name="choiceid2" class="hidden netaid" type="hidden" value="">
           </div>
           <div class="clear"></div>
         </li>
@@ -47,10 +44,12 @@
      </div>
       
       <div id="jfmfs-container"></div>
-	  
+      
       <div class="center secretmsg">
         <input class="awesome green" type="submit" value="Pick!">
       </div>
+      <input id="friendlst" name="friend" class="hidden" type="hidden" value="">
+      <input id="friendidlst" name="friend_id" class="hidden" type="hidden" value="">
     </form>
 </div>
 {% endblock %}

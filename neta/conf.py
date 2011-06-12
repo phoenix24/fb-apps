@@ -12,6 +12,8 @@ FACEBOOK_REALTIME_VERIFY_TOKEN = 'RANDOM TOKEN'
 # send it's pings.
 EXTERNAL_HREF = 'http://vtestss.appspot.com/'
 
+PICK_EXCEPTION_1 = "Pick A Few Neta's"
+
 """ test users list, facebook User IDs of admins. The poor mans admin system. """
 ADMIN_USER_IDS = ['628745933', '750235700', '650447031', '703116438']
 ADMIN_USER_EMAILS = ['gopi.daiict@gmail.com', 'prakharkjain@gmail.com', 'sonalj82@yahoo.com']

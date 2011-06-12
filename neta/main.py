@@ -16,6 +16,8 @@
 
 
 import os
+from itertools import *
+
 # dummy config to enable registering django template filters
 os.environ[u'DJANGO_SETTINGS_MODULE'] = u'conf'
 
@@ -118,6 +120,19 @@ class Run(db.Model):
 
 
 class RunException(Exception):
+    pass
+
+
+class Pick(db.Model):
+    date = db.DateTimeProperty(required=True)
+    neta = db.StringProperty(required=True)
+    friend = db.StringProperty(required=True)
+    friend_id = db.StringProperty(required=True)
+    user_id = db.StringProperty(required=True)
+    user_name = db.StringProperty(required=True)
+
+
+class PickException(Exception):
     pass
 
 
@@ -432,54 +447,47 @@ class RunHandler(BaseHandler):
                 content=u'Unknown error occured. (' + unicode(e) + u')')
         self.redirect(u'/')
 
+
 class PickHandler(BaseHandler):
-    """Add a run"""
     @user_required
     def post(self):
         try:
-            choice0 = self.request.POST[u'choice0'].strip()
-            choice1 = self.request.POST[u'choice1'].strip()
-            choice2 = self.request.POST[u'choice2'].strip()
-            choiceid0 = self.request.POST[u'choiceid0'].strip()
-            choiceid1 = self.request.POST[u'choiceid1'].strip()
-            choiceid2 = self.request.POST[u'choiceid2'].strip()
+            neta = self.request.POST[u'netaname'].strip()
+            friends = self.request.POST[u'friend'].strip()
+            friends_ids = self.request.POST[u'friend_id'].strip()
             
-            if not choice0 or not choiceid0:
-                raise PickException(u'Hey! feed atleast one valentine pick.')
-
-            if not choice1 or not choiceid1:
-                raise PickException(u'Hey! feed atleast one valentine pick.')
-
-            if not choice2 or not choiceid2:
-                raise PickException(u'Hey! feed atleast one valentine pick.')
+            if not neta or not friends_ids:
+                raise PickException(conf.PICK_EXCEPTION_1)
 
             date = datetime.datetime.now()
-
-            pick = Pick(
-                user_id=self.user.user_id,
-                user_name=self.user.name,
-                choice0=choice0,
-                choice1=choice1,
-                choice2=choice2,
-                choiceid0=choiceid0,
-                choiceid1=choiceid1,
-                choiceid2=choiceid2,
-                date=date,
-            )
-            pick.put()
-#            self.set_message(type=u'success', content=u'Added your pick. ')
-
+            friends = friends.split(";")
+            friends_ids = friends_ids.split(";")
+            
+            for friend, friend_id in izip(friends, friends_ids):
+                logging.info('REQUEST OBJECT : id: %s, name: %s ' % (friend, friend_id))
+                if friend != "" and friend_id != "":
+                    pick = Pick(
+                        date=date,
+                        neta=neta,
+                        friend=friend,
+                        friend_id=friend_id,
+                        user_id=self.user.user_id,
+                        user_name=self.user.name,
+                    )
+                    pick.put()
+#           self.set_message(type=u'success', content=u'Added your pick. ')
+            
         except PickException, e:
             self.set_message(type=u'error', content=unicode(e))
-			
         except KeyError:
-            self.set_message(type=u'error', content=u'Yo! take a pick.')
-			
+            self.set_message(type=u'error',
+                content=u'Yo! take a pick.')
         except ValueError:
-            self.set_message(type=u'error', content=u'Yo! take a pick.')
-			
+            self.set_message(type=u'error',
+                content=u'Yo! take a pick.')
         except Exception, e:
-            self.set_message(type=u'error', content=u'Unknown error occured. (' + unicode(e) + u')')
+            self.set_message(type=u'error',
+                content=u'Unknown error occured. (' + unicode(e) + u')')
             
         self.redirect(u'/user')
 
@@ -567,7 +575,7 @@ def main():
         (r'/pick', PickHandler),
 #        (r'/user', UserHandler),
     ]
-	
+    
     application = webapp.WSGIApplication(routes,
         debug=os.environ.get('SERVER_SOFTWARE', '').startswith('Dev'))
     util.run_wsgi_app(application)
