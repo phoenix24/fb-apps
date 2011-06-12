@@ -188,15 +188,10 @@ ul.choices li {
   cursor: pointer;
   margin: -25px 0 0 150px;
 }
-.secretmsg {
-	padding: 60px 0 10px 0;
-	background: url("/secret-message2.png") no-repeat;
-	margin: 10px 0 0 170px;
-	width: 350px;
-}
 .close-button img {
   margin: 0 0 0 -5px;
 }
+
 /**
  * Friends List;
  */
