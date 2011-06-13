@@ -438,50 +438,6 @@ class RunHandler(BaseHandler):
         self.redirect(u'/')
 
 
-class PickHandler(BaseHandler):
-    @user_required
-    def post(self):
-        try:
-            neta = self.request.POST[u'netaname'].strip()
-            friends = self.request.POST[u'friend'].strip()
-            friends_ids = self.request.POST[u'friend_id'].strip()
-            
-            if not neta or not friends_ids:
-                raise PickException(conf.PICK_EXCEPTION_1)
-
-            date = datetime.datetime.now()
-            friends = friends.split(";")
-            friends_ids = friends_ids.split(";")
-            
-            for friend, friend_id in izip(friends, friends_ids):
-                logging.info('REQUEST OBJECT : id: %s, name: %s ' % (friend, friend_id))
-                if friend != "" and friend_id != "":
-                    pick = Pick(
-                        date=date,
-                        neta=neta,
-                        friend=friend,
-                        friend_id=friend_id,
-                        user_id=self.user.user_id,
-                        user_name=self.user.name,
-                    )
-                    pick.put()
-#           self.set_message(type=u'success', content=u'Added your pick. ')
-            
-        except PickException, e:
-            self.set_message(type=u'error', content=unicode(e))
-        except KeyError:
-            self.set_message(type=u'error',
-                content=u'Yo! take a pick.')
-        except ValueError:
-            self.set_message(type=u'error',
-                content=u'Yo! take a pick.')
-        except Exception, e:
-            self.set_message(type=u'error',
-                content=u'Unknown error occured. (' + unicode(e) + u')')
-            
-        self.redirect(u'/user')
-
-
 class RealtimeHandler(BaseHandler):
     """Handles Facebook Real-time API interactions"""
     csrf_protect = False
@@ -552,29 +508,78 @@ class RefreshUserHandler(BaseHandler):
             user.put()
 
 
+class PickHandler(BaseHandler):
+    @user_required
+    def post(self):
+        try:
+            neta = self.request.POST[u'netaname'].strip()
+            friends = self.request.POST[u'friend'].strip()
+            friends_ids = self.request.POST[u'friend_id'].strip()
+            
+            if not neta or not friends_ids:
+                raise PickException(conf.PICK_EXCEPTION_1)
+
+            date = datetime.datetime.now()
+            friends = friends.split(";")
+            friends_ids = friends_ids.split(";")
+            
+            for friend, friend_id in izip(friends, friends_ids):
+                logging.info('REQUEST OBJECT : id: %s, name: %s ' % (friend, friend_id))
+                if friend != "" and friend_id != "":
+                    pick = Pick(
+                        date=date,
+                        neta=neta,
+                        friend=friend,
+                        friend_id=friend_id,
+                        user_id=self.user.user_id,
+                        user_name=self.user.name,
+                    )
+                    pick.put()
+#           self.set_message(type=u'success', content=u'Added your pick. ')
+            
+        except PickException, e:
+            self.set_message(type=u'error', content=unicode(e))
+        except KeyError:
+            self.set_message(type=u'error',
+                content=u'Yo! take a pick.')
+        except ValueError:
+            self.set_message(type=u'error',
+                content=u'Yo! take a pick.')
+        except Exception, e:
+            self.set_message(type=u'error',
+                content=u'Unknown error occured. (' + unicode(e) + u')')
+            
+        self.redirect(u'/user')
+
+
 class WelcomeHandler(BaseHandler):
     """Show recent runs for the user and friends"""
     def get(self):
         if self.user:
             friends = {}
             self.render(u'pick', friends=friends,)
-s        else:
+        else:
             self.render(u'welcome')
 
 
 class HallOfShame(BaseHandler):
     def get(self):
-		self.render(u'hallofshame')
+        self.render(u'hallofshame')
+
+
+class NetaGiri(BaseHandler):
+    def get(self):
+        self.render(u'neta.giri')
 
 
 class NetaCalculator(BaseHandler):
     def get(self):
-		self.render(u'neta.calculator')
+        self.render(u'neta.calculator')
 
 
 class NetaLeaderboard(BaseHandler):
     def get(self):
-		self.render(u'neta.leaderboard')
+        self.render(u'neta.leaderboard')
 
 
 def main():
@@ -582,6 +587,7 @@ def main():
         (r'/', WelcomeHandler),
         (r'/pick', PickHandler),
         (r'/hallofshame', HallOfShame),
+        (r'/netagiri', NetaGiri),
         (r'/netacalculator', NetaCalculator),
         (r'/netaleaderboard', NetaLeaderboard),
 #       (r'/user', UserHandler),
