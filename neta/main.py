@@ -583,8 +583,16 @@ class HallOfShame(BaseHandler):
 
 
 class NetaGiri(BaseHandler):
-    def get(self):
-        self.render(u'neta.giri')
+    def get(self, user_id):
+        if not user_id or user_id == "":
+            user_id = self.user.user_id
+            
+        netas = {}
+        for neta in ['manmohan', 'rahul', 'sibal']:
+            netas[neta] = Pick.gql("WHERE neta = :1 AND friend_id = :2 ", neta, user_id).count()
+            logging.info('fetching leader info %s, %s, %s' % (user_id, neta, netas[neta]))
+        
+        self.render(u'neta.giri', netas=netas)
 
 
 class NetaCalculator(BaseHandler):
@@ -607,7 +615,7 @@ def main():
         (r'/', WelcomeHandler),
         (r'/pick', PickHandler),
         (r'/hallofshame', HallOfShame),
-        (r'/netagiri', NetaGiri),
+        (r'/netagiri/(.*)', NetaGiri),
         (r'/netacalculator', NetaCalculator),
         (r'/netaleaderboard', NetaLeaderboard),
 #       (r'/user', UserHandler),
