@@ -36,10 +36,11 @@ ul, li {
   padding: 0;
 }
 
-
-/**
- * General Styles
- */
+/** General Styles */
+#doc {
+  width: 758px;
+  margin: 0 auto;
+}
 .clear {
   clear: both;
 }
@@ -75,15 +76,6 @@ ul.choices li {
   font-size: 20px !important;
   padding: 10px 15px !important;
 }
-
-/**
- * Document
- */
-#doc {
-  width: 758px;
-  margin: 0 auto;
-}
-
 
 /**
  * Header
@@ -192,73 +184,12 @@ ul.choices li {
   margin: 0 0 0 -5px;
 }
 
-/**
- * Friends List;
- */
-.friends {
-  width: 705px;
-  height: 305px;
-  overflow-y: scroll;
-  margin: 30px 0 30px 10px;
-}
-.friends li.run {
-    -moz-border-radius: 4px 4px 4px 4px;
-    background: none repeat scroll 0 0 #CCCCFF;
-    border: 1px solid #6699CC;
-    float: left;
-    margin: 0 7px 7px 0;
-    padding: 5px;
-    width: 150px;
-}
-.friends li.run:hover {
-	cursor: pointer;
-  background: #6699cc;
-  border: 1px solid #3366cc;
-}
-.friends li.run a {
-  width: 80px;
-  float: left;
-  margin: 0 5px;
-  color: #000000;
-  text-align: left;
-  word-wrap: break-word;
-}
-.friends li.run:hover a {
-  color: #ffffff;
-  text-decoration: none;
-}
-.friends li.run .pic {
-	float: left;
-	padding: 3px;
-	border: 1px solid #6699CC;
-  vertical-align: middle;
-}
-.friends li.run:hover .pic {
-  border: 1px solid #ccccff;
-}
-.friends li.clicked {
-  cursor: pointer;
-  background: #3366cc;
-  border: 1px solid #333399;
-}
-.friends li.clicked a {
-  color: #FFFFFF;
-}
 .picktitle {
 	width: 100%;
 	margin: -15px 0 25px 0;
 	padding: 0 0 15px 0;
 	text-align: center;
 	font-size: 11px;
-	font-weight: bold;
-}
-.picktitle .ptitle {
-	color: #EC008C;
-	font-size: 13px;
-}
-.picktitle .psubtitle {
-}
-.rating .subtitle {
 	font-weight: bold;
 }
 .rating .label {
@@ -290,4 +221,3 @@ ul.choices li {
 .invite .text {
   font-size: 17px;
 }
-
