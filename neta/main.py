@@ -123,8 +123,17 @@ class RunException(Exception):
     pass
 
 
+class LeaderBoard(db.Model): 
+    score = db.IntegerProperty(default=0)
+    neta = db.StringProperty(required=True)
+    friend = db.StringProperty(required=True)
+    friend_id = db.StringProperty(required=True)
+
+class LeaderBoardException(Exception):
+    pass
+
+
 class Pick(db.Model):
-    date = db.DateTimeProperty(required=True)
     neta = db.StringProperty(required=True)
     friend = db.StringProperty(required=True)
     friend_id = db.StringProperty(required=True)
@@ -511,7 +520,7 @@ class RefreshUserHandler(BaseHandler):
 class PickHandler(BaseHandler):
     @user_required
     def post(self):
-        try:
+#        try:
             neta = self.request.POST[u'netaname'].strip()
             friends = self.request.POST[u'friend'].strip()
             friends_ids = self.request.POST[u'friend_id'].strip()
@@ -519,7 +528,6 @@ class PickHandler(BaseHandler):
             if not neta or not friends_ids:
                 raise PickException(conf.PICK_EXCEPTION_1)
 
-            date = datetime.datetime.now()
             friends = friends.split(";")
             friends_ids = friends_ids.split(";")
             
@@ -527,7 +535,6 @@ class PickHandler(BaseHandler):
                 logging.info('REQUEST OBJECT : id: %s, name: %s ' % (friend, friend_id))
                 if friend != "" and friend_id != "":
                     pick = Pick(
-                        date=date,
                         neta=neta,
                         friend=friend,
                         friend_id=friend_id,
@@ -535,21 +542,28 @@ class PickHandler(BaseHandler):
                         user_name=self.user.name,
                     )
                     pick.put()
-#           self.set_message(type=u'success', content=u'Added your pick. ')
+
+                    kwds = {
+                      'score' : 0,
+                      'neta': neta,
+                      'friend' : friend,
+                      'friend_id': friend_id,
+                    }
+                    leader  = LeaderBoard.get_or_insert(key_name=friend_id, **kwds)
+                    
+                    if neta == "manmohan":
+                        leader.score = leader.score + 5
+                    if neta == "rahul":
+                        leader.score = leader.score + 10
+                    if neta == "sibal":
+                        leader.score = leader.score + 15
+                    leader.put()
+                    logging.info('fetching leader info %s, score: %s' % (friend_id, leader.score))
             
-        except PickException, e:
-            self.set_message(type=u'error', content=unicode(e))
-        except KeyError:
-            self.set_message(type=u'error',
-                content=u'Yo! take a pick.')
-        except ValueError:
-            self.set_message(type=u'error',
-                content=u'Yo! take a pick.')
-        except Exception, e:
-            self.set_message(type=u'error',
-                content=u'Unknown error occured. (' + unicode(e) + u')')
+#        except Exception, e:
+#            logging.info('exception %s' % (friend_id))
             
-        self.redirect(u'/user')
+            self.redirect(u'/hallofshame')
 
 
 class WelcomeHandler(BaseHandler):
@@ -564,7 +578,8 @@ class WelcomeHandler(BaseHandler):
 
 class HallOfShame(BaseHandler):
     def get(self):
-        self.render(u'hallofshame')
+        leaders = LeaderBoard.gql("ORDER BY score DESC LIMIT 10")
+        self.render(u'hallofshame', leaders=leaders)
 
 
 class NetaGiri(BaseHandler):
@@ -579,7 +594,12 @@ class NetaCalculator(BaseHandler):
 
 class NetaLeaderboard(BaseHandler):
     def get(self):
-        self.render(u'neta.leaderboard')
+        netas = {}
+        for neta in ['manmohan', 'rahul', 'sibal']:
+            netas[neta] = Pick.gql("WHERE neta = :1", neta).count()
+            logging.info('fetching leader info %s, %s' % (neta, netas[neta]))
+        
+        self.render(u'neta.leaderboard', netas=netas)
 
 
 def main():

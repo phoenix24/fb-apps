@@ -141,11 +141,11 @@ ul.choices li {
  * Welcome Page
  */
 .promo {
-	background: url("/welcome-pg-final1.jpg");
+  background: url("/welcome-pg-final1.jpg");
 }
 .welcome, .promo {
   border: none;
-	cursor: pointer;
+  cursor: pointer;
 }
 .title, .title2 {
 	height: 150px;
