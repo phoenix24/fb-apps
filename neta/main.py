@@ -369,16 +369,6 @@ def user_required(fn):
     return wrapper
 
 
-class WelcomeHandler(BaseHandler):
-    """Show recent runs for the user and friends"""
-    def get(self):
-        if self.user:
-            friends = {}
-            self.render(u'pick', friends=friends,)
-        else:
-            self.render(u'welcome')
-
-
 class UserRunsHandler(BaseHandler):
     """Show a specific user's runs, ensure friendship with the logged in user"""
     @user_required
@@ -562,18 +552,39 @@ class RefreshUserHandler(BaseHandler):
             user.put()
 
 
+class WelcomeHandler(BaseHandler):
+    """Show recent runs for the user and friends"""
+    def get(self):
+        if self.user:
+            friends = {}
+            self.render(u'pick', friends=friends,)
+s        else:
+            self.render(u'welcome')
+
+
+class HallOfShame(BaseHandler):
+    def get(self):
+		self.render(u'hallofshame')
+
+
+class NetaCalculator(BaseHandler):
+    def get(self):
+		self.render(u'neta.calculator')
+
+
+class NetaLeaderboard(BaseHandler):
+    def get(self):
+		self.render(u'neta.leaderboard')
+
+
 def main():
-#    routes = [
-#        (r'/', RecentRunsHandler),
-#        (r'/user/(.*)', UserRunsHandler),
-#        (r'/run', RunHandler),
-#        (r'/realtime', RealtimeHandler),
-#        (r'/task/refresh-user/(.*)', RefreshUserHandler),
-#    ]
     routes = [
         (r'/', WelcomeHandler),
         (r'/pick', PickHandler),
-#        (r'/user', UserHandler),
+        (r'/hallofshame', HallOfShame),
+        (r'/netacalculator', NetaCalculator),
+        (r'/netaleaderboard', NetaLeaderboard),
+#       (r'/user', UserHandler),
     ]
     
     application = webapp.WSGIApplication(routes,
