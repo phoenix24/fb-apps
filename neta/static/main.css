@@ -162,7 +162,7 @@ ul.choices li {
 #runs {
   min-height: 540px;
   padding: 30px 15px;
-  background: #ffffff url("/bg-pattern1.jpg");
+  background: #ffffff;
 }
 .center {
   width: 100%;
