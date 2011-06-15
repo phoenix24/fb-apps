@@ -3,14 +3,28 @@
 {% block title %}Welcome{% endblock %}
 {% block body %}
 <div class="welcome">
-<table>
-{% for name, rank in netas.items %}
-	<tr>
-		<td>{{ forloop.counter }}</td>
-		<td><a href="">{{ name }}</a></td>
-		<td><a href="">{{ rank }}</a></td>
-	</tr>
-{% endfor %}
-</table>
+
+<div class="">
+	<table>
+	{% for name, rank in netas.items %}
+		<tr>
+			<td>{{ forloop.counter }}</td>
+			<td><a href="">{{ name }}</a></td>
+			<td><a href="">{{ rank }}</a></td>
+		</tr>
+	{% endfor %}
+	</table>
+</div>
+<div class="">
+	<table>
+		<tr> <td>1.</td><td><a href=""> 5 rahul   </a></td>  <td><a href=""> = 1 lalu    </a></td> </tr>
+		<tr> <td>1.</td><td><a href=""> 5 lalu    </a></td>  <td><a href=""> = 1 kalmadi </a></td> </tr>
+		<tr> <td>2.</td><td><a href=""> 5 kalmadi </a></td>  <td><a href=""> = 1 maya    </a></td> </tr>
+		<tr> <td>3.</td><td><a href=""> 5 maya    </a></td>  <td><a href=""> = 1 sibal   </a></td> </tr>
+		<tr> <td>4.</td><td><a href=""> 5 sibal   </a></td>  <td><a href=""> = 1 maran   </a></td> </tr>
+		<tr> <td>5.</td><td><a href=""> 5 maran   </a></td>  <td><a href=""> = 1 balu    </a></td> </tr>
+	</table>
+</div>
+
 </div>
 {% endblock %}

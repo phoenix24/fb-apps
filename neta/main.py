@@ -586,6 +586,8 @@ class NetaGiri(BaseHandler):
     def get(self, user_id):
         if not user_id or user_id == "":
             user_id = self.user.user_id
+        
+        logging.info('FETCHING USER INFO %s' % (user_id))
             
         netas = {}
         for neta in ['manmohan', 'rahul', 'sibal']:
@@ -593,11 +595,6 @@ class NetaGiri(BaseHandler):
             logging.info('fetching leader info %s, %s, %s' % (user_id, neta, netas[neta]))
         
         self.render(u'neta.giri', netas=netas)
-
-
-class NetaCalculator(BaseHandler):
-    def get(self):
-        self.render(u'neta.calculator')
 
 
 class NetaLeaderboard(BaseHandler):
@@ -616,7 +613,6 @@ def main():
         (r'/pick', PickHandler),
         (r'/hallofshame', HallOfShame),
         (r'/netagiri/(.*)', NetaGiri),
-        (r'/netacalculator', NetaCalculator),
         (r'/netaleaderboard', NetaLeaderboard),
 #       (r'/user', UserHandler),
     ]
