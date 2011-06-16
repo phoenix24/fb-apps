@@ -129,6 +129,10 @@ class LeaderBoard(db.Model):
     friend = db.StringProperty(required=True)
     friend_id = db.StringProperty(required=True)
 
+    @staticmethod
+    def find_top_n_users(limit=10):
+        return LeaderBoard.gql("ORDER BY score DESC").fetch(limit)
+
 class LeaderBoardException(Exception):
     pass
 
@@ -140,6 +144,13 @@ class Pick(db.Model):
     user_id = db.StringProperty(required=True)
     user_name = db.StringProperty(required=True)
 
+    @staticmethod
+    def find_netagiri(user_id):
+        netas = {}
+        for neta in ['manmohan', 'rahul', 'sibal']:
+            netas[neta] = Pick.gql("WHERE neta = :1 AND friend_id = :2 ", neta, user_id).count()
+            logging.info('fetching leader info %s, %s, %s' % (user_id, neta, netas[neta]))
+        return netas
 
 class PickException(Exception):
     pass
@@ -578,22 +589,13 @@ class WelcomeHandler(BaseHandler):
 
 class HallOfShame(BaseHandler):
     def get(self):
-        leaders = LeaderBoard.gql("ORDER BY score DESC LIMIT 10")
+        leaders = LeaderBoard.find_top_n_users()
         self.render(u'hallofshame', leaders=leaders)
 
 
 class NetaGiri(BaseHandler):
     def get(self, user_id):
-        if not user_id or user_id == "":
-            user_id = self.user.user_id
-        
-        logging.info('FETCHING USER INFO %s' % (user_id))
-            
-        netas = {}
-        for neta in ['manmohan', 'rahul', 'sibal']:
-            netas[neta] = Pick.gql("WHERE neta = :1 AND friend_id = :2 ", neta, user_id).count()
-            logging.info('fetching leader info %s, %s, %s' % (user_id, neta, netas[neta]))
-        
+        netas = Pick.find_netagiri(user_id)
         self.render(u'neta.giri', netas=netas)
 
 
