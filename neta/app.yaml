@@ -16,3 +16,5 @@ handlers:
   script: main.py
   login: admin
 
+builtins:
+- datastore_admin: on

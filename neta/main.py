@@ -551,8 +551,9 @@ class PickHandler(BaseHandler):
             friends = friends.split(";")
             friends_ids = friends_ids.split(";")
             
+            picklist = []
+            leaderbrdlist = []
             for friend, friend_id in izip(friends, friends_ids):
-                logging.info('REQUEST OBJECT : id: %s, name: %s ' % (friend, friend_id))
                 if friend != "" and friend_id != "":
                     pick = Pick(
                         neta=neta,
@@ -561,7 +562,7 @@ class PickHandler(BaseHandler):
                         user_id=self.user.user_id,
                         user_name=self.user.name,
                     )
-                    pick.put()
+                    picklist.append(pick) #.put()
 
                     kwds = {
                       'score' : 0,
@@ -577,9 +578,11 @@ class PickHandler(BaseHandler):
                         leader.score = leader.score + 10
                     if neta == "sibal":
                         leader.score = leader.score + 15
-                    leader.put()
-                    logging.info('fetching leader info %s, score: %s' % (friend_id, leader.score))
+                    leaderbrdlist.append(leader) #.put()
             
+            db.put(picklist)
+            db.put(leaderbrdlist)
+            logging.info('friend id %s, picks: %s, leaderbrdlist: %s' % (friend_id, len(picklist), len(leaderbrdlist)))
 #        except Exception, e:
 #            logging.info('exception %s' % (friend_id))
             
