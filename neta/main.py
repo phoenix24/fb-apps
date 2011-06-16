@@ -151,7 +151,16 @@ class Pick(db.Model):
             netas[neta] = Pick.gql("WHERE neta = :1 AND friend_id = :2 ", neta, user_id).count()
             logging.info('fetching leader info %s, %s, %s' % (user_id, neta, netas[neta]))
         return netas
-
+    
+    @staticmethod
+    def find_netaleaderboard():
+        netas = {}
+        for neta in ['manmohan', 'rahul', 'sibal']:
+            netas[neta] = Pick.gql("WHERE neta = :1", neta).count()
+            logging.info('fetching leader info %s, %s' % (neta, netas[neta]))
+        return netas
+    
+    
 class PickException(Exception):
     pass
 
@@ -581,8 +590,7 @@ class WelcomeHandler(BaseHandler):
     """Show recent runs for the user and friends"""
     def get(self):
         if self.user:
-            friends = {}
-            self.render(u'pick', friends=friends,)
+            self.render(u'pick', friends={})
         else:
             self.render(u'welcome')
 
@@ -601,11 +609,7 @@ class NetaGiri(BaseHandler):
 
 class NetaLeaderboard(BaseHandler):
     def get(self):
-        netas = {}
-        for neta in ['manmohan', 'rahul', 'sibal']:
-            netas[neta] = Pick.gql("WHERE neta = :1", neta).count()
-            logging.info('fetching leader info %s, %s' % (neta, netas[neta]))
-        
+        netas = Pick.find_netaleaderboard()
         self.render(u'neta.leaderboard', netas=netas)
 
 
