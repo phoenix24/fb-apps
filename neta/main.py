@@ -595,6 +595,12 @@ class WelcomeHandler(BaseHandler):
             self.render(u'welcome')
 
 
+class Admin(BaseHandler):
+    def get(self):
+        netas = Pick.find_netaleaderboard()
+        self.render(u'admin', netas=netas)
+
+
 class HallOfShame(BaseHandler):
     def get(self):
         leaders = LeaderBoard.find_top_n_users()
@@ -620,6 +626,7 @@ def main():
         (r'/hallofshame', HallOfShame),
         (r'/netagiri/(.*)', NetaGiri),
         (r'/netaleaderboard', NetaLeaderboard),
+        (r'/admin', Admin),
 #       (r'/user', UserHandler),
     ]
     
