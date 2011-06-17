@@ -2,15 +2,15 @@
 
 {% block title %}Welcome{% endblock %}
 {% block body %}
-<div class="welcome">
-<table>
-{% for leader in leaders %}
-	<tr>
-		<td>{{ forloop.counter }}</td>
-		<td><a href="/netagiri/{{ leader.friend_id }}">{{ leader.friend }}</a></td>
-		<td><a href="">{{ leader.score }}</a></td>
-	</tr>
-{% endfor %}
-</table>
+<div class="fbbd">
+	<table>
+	{% for leader in leaders %}
+		<tr>
+			<td>{{ forloop.counter }}</td>
+			<td><a href="/netagiri/{{ leader.friend_id }}">{{ leader.friend }}</a></td>
+			<td><a href="">{{ leader.score }}</a></td>
+		</tr>
+	{% endfor %}
+	</table>
 </div>
 {% endblock %}

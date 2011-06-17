@@ -14,7 +14,7 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
    
-(function($) { 
+(function($) {
     var JFMFS = function(element, options) {
         var elem = $(element),
             obj = this,
@@ -122,8 +122,8 @@
             // handle when a friend is clicked for selection
             elem.delegate(".jfmfs-friend", 'click', function(event) {
                 
-              // if the element is being selected, test if the max number of items have
-              // already been selected, if so, just return
+//              if the element is being selected, test if the max number of items have
+//              already been selected, if so, just return
 //              if(!$(this).hasClass("selected") && maxSelectedEnabled() &&
 //                $(".jfmfs-friend.selected").size() >= settings.max_selected && settings.max_selected != 1) {
 //                     $(".message .oops").fadeIn(800);
@@ -154,7 +154,7 @@
                     $(this).addClass("selected");
                     var changed = false;
                     
-                    $.each($("ul.choices div.choice"), function(i, child) { 
+                    $.each($("ul.choices div.choice"), function(i, child) {
                         if ($(child).find("input.usrid").val() == "" && !changed) {
                             $(child).find("img.usrimg").attr("src", $(sel).find("img").attr("src"));
                             $(child).find("input.text").val( $(sel).find("div").text() ).addClass("seltext");
@@ -402,23 +402,19 @@ $(document).ready(function() {
   
   $("form.picks input.awesome").click(function() {
   
-	var fs = $("#jfmfs-container").data('jfmfs');
-	var fi = fs.getSelectedIdsAndNames();
+	var fs = $("#jfmfs-container").data('jfmfs'),
+		fi = fs.getSelectedIdsAndNames();
 	
-	var friends = "";
-	var friend_ids = "";
+	var friends = "",
+		friend_ids = "";
 	
 	for (i = 0; i < fi.length; i++ ) {
 		friends = friends + "" + fi[i].name + ";";
 		friend_ids = friend_ids + "" + fi[i].id + ";";
-		console.log("id: " + fi[i].id + ", name: " + fi[i].name); 
 	}
 	
 	$("#friendlst").val(friends);
 	$("#friendidlst").val(friend_ids);
-	
-	console.log("id: " + $("#friendidlst").val()); 
-	console.log("names: " + $("#friendlst").val()); 
 	
 	if (fi.length == 0) {
 		$(".message .doops").fadeIn(800);

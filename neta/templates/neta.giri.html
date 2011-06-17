@@ -2,15 +2,15 @@
 
 {% block title %}Welcome{% endblock %}
 {% block body %}
-<div class="welcome">
-<table>
-{% for name, rank in netas.items %}
-	<tr>
-		<td>{{ forloop.counter }}</td>
-		<td><a href="">{{ name }}</a></td>
-		<td><a href="">{{ rank }}</a></td>
-	</tr>
-{% endfor %}
-</table>
+<div class="fbbd">
+	<table>
+	{% for name, rank in netas.items %}
+		<tr>
+			<td>{{ forloop.counter }}</td>
+			<td><a href="">{{ name }}</a></td>
+			<td><a href="">{{ rank }}</a></td>
+		</tr>
+	{% endfor %}
+	</table>
 </div>
 {% endblock %}

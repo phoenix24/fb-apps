@@ -622,6 +622,13 @@ class NetaLeaderboard(BaseHandler):
         self.render(u'neta.leaderboard', netas=netas)
 
 
+class UserHandler(BaseHandler):
+    @user_required
+    def get(self):
+        netas = Pick.find_netagiri(self.user.user_id)
+        self.render(u'user', netas=netas)
+
+
 def main():
     routes = [
         (r'/', WelcomeHandler),
@@ -630,7 +637,7 @@ def main():
         (r'/netagiri/(.*)', NetaGiri),
         (r'/netaleaderboard', NetaLeaderboard),
         (r'/admin', Admin),
-#       (r'/user', UserHandler),
+        (r'/user', UserHandler),
     ]
     
     application = webapp.WSGIApplication(routes,
