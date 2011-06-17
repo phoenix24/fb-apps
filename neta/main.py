@@ -398,6 +398,17 @@ def user_required(fn):
     return wrapper
 
 
+def admin_required(fn):
+    """Decorator to ensure a user is present"""
+    @wraps(fn)
+    def wrapper(*args, **kwargs):
+        handler = args[0]
+        if handler.user and (handler.user.user_id in conf.ADMIN_USER_IDS):
+            return fn(*args, **kwargs)
+        handler.redirect(u'/')
+    return wrapper
+
+
 class UserRunsHandler(BaseHandler):
     """Show a specific user's runs, ensure friendship with the logged in user"""
     @user_required
@@ -599,9 +610,9 @@ class WelcomeHandler(BaseHandler):
 
 
 class Admin(BaseHandler):
+    @admin_required
     def get(self):
-        netas = Pick.find_netaleaderboard()
-        self.render(u'admin', netas=netas)
+        self.render(u'admin')
 
 
 class HallOfShame(BaseHandler):
@@ -611,6 +622,7 @@ class HallOfShame(BaseHandler):
 
 
 class NetaGiri(BaseHandler):
+    @user_required
     def get(self, user_id):
         netas = Pick.find_netagiri(user_id)
         self.render(u'neta.giri', netas=netas)
