@@ -617,8 +617,10 @@ class Admin(BaseHandler):
 
 class HallOfShame(BaseHandler):
     def get(self):
+        netas = Pick.find_netaleaderboard()
         leaders = LeaderBoard.find_top_n_users()
-        self.render(u'hallofshame', leaders=leaders)
+        menetas = Pick.find_netagiri(self.user.user_id)
+        self.render(u'hallofshame', leaders=leaders, netas=netas, menetas=menetas)
 
 
 class NetaGiri(BaseHandler):

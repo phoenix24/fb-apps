@@ -3,14 +3,47 @@
 {% block title %}Welcome{% endblock %}
 {% block body %}
 <div class="fbbd">
-	<table>
-	{% for leader in leaders %}
-		<tr>
-			<td>{{ forloop.counter }}</td>
-			<td><a href="/netagiri/{{ leader.friend_id }}">{{ leader.friend }}</a></td>
-			<td><a href="">{{ leader.score }}</a></td>
-		</tr>
-	{% endfor %}
-	</table>
+	<div class="center rating menetas">
+		<table>
+		{% for name, rank in menetas.items %}
+			<tr>
+				<td>{{ forloop.counter }}</td>
+				<td><a href="">{{ name }}</a></td>
+				<td><a href="">{{ rank }}</a></td>
+			</tr>
+		{% endfor %}
+		</table>
+	</div>
+	
+	<div class="center rating leaderboard">
+		<table>
+		{% for leader in leaders %}
+			<tr>
+				<td>{{ forloop.counter }}</td>
+				<td><a href="/netagiri/{{ leader.friend_id }}">{{ leader.friend }}</a></td>
+				<td><a href="">{{ leader.score }}</a></td>
+			</tr>
+		{% endfor %}
+		</table>
+	</div>
+
+	<div class="center rating popularneta">
+		<table>
+		{% for name, rank in netas.items %}
+			<tr>
+				<td>{{ forloop.counter }}</td>
+				<td><a href="">{{ name }}</a></td>
+				<td><a href="">{{ rank }}</a></td>
+			</tr>
+		{% endfor %}
+		</table>
+	</div>
+	
+	<div class="center invite">
+		<div class="center">
+			<p class="text">What are you waiting for!</p>
+			<input class="awesome green" type="submit" value="Invite!">
+		</div>
+	</div>
 </div>
 {% endblock %}
