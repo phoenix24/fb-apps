@@ -1,117 +1,22 @@
-<!doctype html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml">
-  <head>
-    <meta charset="utf-8">
-    <title>
-      {% block title %}Admin - Pick Your Valentines{% endblock %}
-    </title>
-    <meta name="description" content="Pick Your Valentines">
-    <link type="text/css" rel="stylesheet" href="/main.css">
-    <script src="http://connect.facebook.net/en_US/all.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
-    <script type="text/javascript" src="/jquery.facebook.multifriend.select.js"></script> 
-    <script>
-       var username = {{ js_conf }};
-       username = username["userName"];
-         
-      {# async loading of facebook js sdk #}
-       $(document).ready(function() {
-         facebookInit({{ js_conf }});
-         
-         function facebookInit(config) {
-        		Config = config;
+{% extends "base.html" %}
 
-        		FB.init({
-        			appId: Config.appId,
-        			xfbml: true,
-        			channelUrl: window.location.protocol + '//' + window.location.host + '/channel.html'
-        		});
-        	
-        		FB.Event.subscribe('auth.sessionChange', function (response) {
-        			if ((Config.userIdOnServer && !response.session) || 
-        				Config.userIdOnServer != response.session.uid) {
-        			}
-        		});
-        	}
-         
-       });
-    </script>
-    <script src="/main.js"></script>
-    
-  </head>
-  <body>
-    {% if logged_in_user %}
-      <div class="hd">
-          <div id="user-info">hello admin user</div>
-      </div>
-      
-    <form action="/admin" method="post">
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" style="display: none">
-        <select name="action" size="5">
-        	<option value="update_matches">update matches</option>
-        	<option value="notify_matches">notify matches</option>
-        </select>
-    	<input type="submit" value="update_action">
-    </form>
-
-      <div class="bd">
-      	<div class="users">
-      		<p>users</p>
-	      	<table>
-		      	<tr>
-		      		<td>user name</td>
-		      		<td>user email</td>
-		      		<td>user fbook id</td>
-		      	</tr>
-		        {% for user in values.users %}
-		        <tr>
-		        	<td> {{ user.name }} </td>
-		        	<td> {{ user.email }} </td>
-		        	<td> {{ user.user_id }} </td>
-		        </tr>
-		        {% endfor %}
-	      	</table>
-      	</div>
-      	<div class="matches">
-      		<p>matches</p>
-	      	<table>
-		      	<tr>
-		      		<td>user name #1</td>
-		      		<td>user name #2</td>
-		      	</tr>
-		        {% for user in values.matches %}
-		        <tr>
-		        	<td> {{ user.user_id1 }} </td>
-		        	<td> {{ user.user_id2 }} </td>
-		        </tr>
-		        {% endfor %}
-	      	</table>
-      	</div>
-      	<div class="picks">
-      		<p>picks</p>
-	      	<table>
-		      	<tr>
-		      		<td>ch #1</td>
-		      		<td>ch #2</td>
-		      		<td>ch #3</td>
-		      	</tr>
-		        {% for user in values.picks %}
-		        <tr>
-		        	<td> {{ user.user_name }} </td>
-		        	<td> {{ user.choice0 }} </td>
-		        	<td> {{ user.choice1 }} </td>
-		        	<td> {{ user.choice2 }} </td>
-		        </tr>
-		        {% endfor %}
-	      	</table>
-      	</div>
-      </div><!-- .bd -->
-
-      <div class="ft">
-      </div>
-
-      <div id="fb-root"></div>
-    {% endif %}
-    
-  </body>
-</html>
+{% block title %}Take a Pick{% endblock %}
+{% block body %}
+<div class="fbbd">
+	<div class="center picktitle">
+		<p>Neta's Admin Console!</p>
+	</div>
+	<div class="center">
+	  <ul class="choices">
+		<li class="first">
+		  <div class="choicert">
+			<img class="usrimg" src="/girl.gif">
+			<p class="netaname"><input type="radio" name="netaname" value="sibal" />sibal</p>
+		  </div>
+		  <div class="clear"></div>
+		</li>
+	  </ul>
+	  <div class="clear"></div>
+	</div>
+</div>
+{% endblock %}

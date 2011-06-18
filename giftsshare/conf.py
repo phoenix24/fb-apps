@@ -1,32 +1,27 @@
 # Facebook Application ID and Secret. Canvas Page name.
-
-import os
-
-FACEBOOK_CANVAS_NAME = 'pickavalentine'
-FACEBOOK_APP_ID = '122311197838517'
-FACEBOOK_APP_SECRET = '72ce50fe7f09f7d845623205ab1c5029'
-
-#if os.environ.get('SERVER_SOFTWARE', '').startswith('Dev'):
-FACEBOOK_CANVAS_NAME = 'vtestss'
 FACEBOOK_APP_ID = '151123518275728'
 FACEBOOK_APP_SECRET = '8be8128c77d815bf709411a29d3ab80f'
 
+# Canvas Page name.
+FACEBOOK_CANVAS_NAME = 'vtestss'
 
 # A random token for use with the Real-time API.
 FACEBOOK_REALTIME_VERIFY_TOKEN = 'RANDOM TOKEN'
 
 # The external URL this application is available at where the Real-time API will
 # send it's pings.
-EXTERNAL_HREF = 'http://pickavalentine.appspot.com/'
+EXTERNAL_HREF = 'http://vtestss.appspot.com/'
+
+PICK_EXCEPTION_1 = "Pick A Few Neta's"
 
 """ test users list, facebook User IDs of admins. The poor mans admin system. """
 ADMIN_USER_IDS = ['628745933', '750235700', '650447031', '703116438']
 ADMIN_USER_EMAILS = ['gopi.daiict@gmail.com', 'prakharkjain@gmail.com', 'sonalj82@yahoo.com']
 
-APP_NAME = "pickavalentine!"
-GTALK_ID = "pickavalentine@appspot.com"
+APP_NAME = "vtestss!"
+GTALK_ID = "vtestss@appspot.com"
 
-EMAILID_FACEBOOK = "facebook@pickavalentine.appspotmail.com"
+EMAILID_FACEBOOK = "facebook@vtestss.appspotmail.com"
 EMAILID_FACEBOOK_MATCH_SUBJECT = "You have a Valentine !!!"
 EMAILID_FACEBOOK_MATCH_BODY = """
 Hi,

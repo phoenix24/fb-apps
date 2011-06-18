@@ -2,89 +2,54 @@
 
 {% block title %}Take a Pick{% endblock %}
 {% block body %}
-<div id="runs">
-    <div class="title2"></div>
-    <div class="center picktitle">
-        <p class="ptitle">MAKE A WISHLIST</p>
-        <p class="psubtitle">PICK 3 OF YOUR FRIENDS AS A POSSIBLE DATE THIS VALENTINE's</p>
-    </div>
-    <form class="picks" action="/pick" method="post">
-      <div style="display: none">
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}">
-      </div>
-      <div class="center">
-      <ul class="choices">
-        <li class="first">
-          <div class="choice choice0">
-	          <div class="choicelft">
-	            <img class="usrimg" src="/girl.gif">
-	          </div>
-	          <div class="choicert">
-	            <input name="choice0" class="text friend-filter" type="text" value="pick a valentine">
-	            <input name="choiceid0" class="hidden usrid" type="hidden" value="">
-	            <div class="close-button"><img src="/cross.jpg"></div>
-	          </div>
-	          <div class="clear"></div>
-          </div>
-        </li>
-        <li>
-          <div class="choice choice1">
-	          <div class="choicelft">
-	            <img class="usrimg" src="/boy.gif">
-	          </div>
-	          <div class="choicert">
-	            <input name="choice1" class="text friend-filter" type="text" value="pick a valentine">
-	            <input name="choiceid1" class="hidden usrid" type="hidden" value="">
-	            <div class="close-button"><img src="/cross.jpg"></div>
-	          </div>
-	          <div class="clear"></div>
-          </div>
-        </li>
-        <li class="last">
-          <div class="choice choice2">
-	          <div class="choicelft">
-	            <img class="usrimg" src="/boy.gif">
-	          </div>
-	          <div class="choicert">
-	    	    <input name="choice2" class="text friend-filter" type="text" value="pick a valentine">
-		        <input name="choiceid2" class="hidden usrid" type="hidden" value="">
-	            <div class="close-button"><img src="/cross.jpg"></div>
-              </div>
-	          <div class="clear"></div>
-          </div>
-        </li>
-      </ul>
-      <div class="clear"></div>
-      </div>
-      
-      <div class="message">
- 	     <p class="error oops">oops! you've already selected 3 friends. Now just click the pick button.</p>
- 	     <p class="error doops">You have to pick atleast 3 friends to proceed. It can't be that hard.</p>
- 	     <p class="error intro">Click on the friend below to pick.</p>
-  	  </div>
-      
-      <div id="jfmfs-container"></div>
-      
-      {% if friends %}
-      <div class="center friends">
-        <ul>
-        {% for run in friends %}
-        <li class="run" id="{{ run.id }}">
-            <img class="pic" height="50" width="50" src="{{ run|get_picture }}" alt="{{ run|get_name }}">
-            <a class="name" userid="{{ run.id }}" username="{{ run|get_name }}" href="#" alt="{{ run.name|escape }}">
-              {{ run|get_name }}
-            </a>
-        </li>
-        {% endfor %}
-        </ul>
-        <div class="clear"></div>
-      </div>
-      {% endif %}
-      
-      <div class="center secretmsg">
-        <input class="awesome green" type="submit" value="Pick!">
-      </div>
-    </form>
-    
+<div class="fbbd">
+	<div class="center picktitle">
+		<p>Pick Your Neta's</p>
+	</div>
+	<form class="picks" action="/pick" method="post">
+	  <div style="display: none">
+		<input type="hidden" name="_csrf_token" value="{{ csrf_token }}">
+	  </div>
+	  <div class="center">
+	  <ul class="choices">
+		<li class="first">
+		  <div class="choicert">
+			<img class="usrimg" src="/girl.gif">
+			<p class="netaname"><input type="radio" name="netaname" value="sibal" />sibal</p>
+		  </div>
+		  <div class="clear"></div>
+		</li>
+		<li>
+		  <div class="choicert">
+			<img class="usrimg" src="/boy.gif">
+			<p class="netaname"><input type="radio" name="netaname" value="manmohan" checked />man mohan</p>
+		  </div>
+		  <div class="clear"></div>
+		</li>
+		<li class="last">
+		  <div class="choicert">
+			<img class="usrimg" src="/boy.gif">
+			<p class="netaname"><input type="radio" name="netaname" value="rahul" />rahul</p>
+		  </div>
+		  <div class="clear"></div>
+		</li>
+	  </ul>
+	  <div class="clear"></div>
+	  </div>
+	  
+	  <div class="message">
+		 <p class="error oops">oops! you've already selected 3 friends. Now just click the pick button.</p>
+		 <p class="error doops">Pick atleast 1 friendly neta to proceed. It can't be that hard.</p>
+		 <p class="error intro">Click on the friend below to pick.</p>
+	 </div>
+	  
+	  <div id="jfmfs-container"></div>
+	  
+	  <div class="center secretmsg">
+		  <input class="awesome green" type="submit" value="Pick!">
+		  <input id="friendlst" name="friend" class="hidden" type="hidden" value="">
+		  <input id="friendidlst" name="friend_id" class="hidden" type="hidden" value="">
+	  </div>
+	</form>
 </div>
 {% endblock %}
