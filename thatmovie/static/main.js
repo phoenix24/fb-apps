@@ -386,8 +386,8 @@ $(document).ready(function() {
   $("div.invite input.awesome").live('click', function(evt) {
 	FB.ui({ 
 		method: "apprequests",
-		title: "Who's the real neta, time to find out",
-		message: "Find the real Neta's.\r\nAsk Your Friend.\r\n\r\n",
+		title: "Who would you like to date this Valentine?",
+		message: "Here is your chance to find a Valetine date in the safest way.\r\nPick 3 Valentines from your friends and if they pick you aswell then only both of you get to know that you chose each other.\r\n\r\nSo, What are you waiting for, Pick Your Valentine!",
 		data: "tracking information for the user",
 	});
   });
@@ -421,11 +421,11 @@ $(document).ready(function() {
 	} else {
 		FB.ui({
 			 method: 'feed',
-			 name: "OH! I just found the biggest scamsters of all.",
-			 link: "http://apps.facebook.com/vtestss/",
-			 picture: "http://giftsshare.appspot.com/icon75x75.jpg",
-			 caption: "OH! I just found the biggest scamsters of all. Now is the time, you must too.",
-			 description: "Now is the time, find the biggest scamster of all",
+			 name: username + " just made 3 picks from friends for a Valentine date.",
+			 link: "http://apps.facebook.com/pickavalentine/",
+			 picture: "http://pickavalentine.appspot.com/icon75x75.jpg",
+			 caption: "Now " + username + " has a chance to find out if any of those 3 friends want to pick " + username + ". But the secret will only be revealed if the chosen friends also pick " + username + " ;)",
+			 description: "So, what are you waiting for, Pick Your Valentine and discover who picks you back!",
 			 message: ""
 		},
 		function(response) {

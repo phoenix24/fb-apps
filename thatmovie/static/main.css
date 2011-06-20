@@ -1,0 +1,408 @@
+body {
+	color: #000;
+	font-size: 15px;
+	background: #fff;
+	text-align: left;
+	font-family: verdana,arial,sans-serif;
+}
+body, a, h1, h2, h3, h4, h5, h6, dt, p {
+	margin: 0;
+	padding: 0;
+}
+a {
+	color: #000000;
+	text-decoration: none;
+}
+a:hover {
+	color: #2fa600;
+	cursor: pointer;
+	text-decoration: underline;
+}
+img {
+	border: none;
+}
+ul, li {
+	list-style: none;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+.clear {
+	clear: both;
+}
+.hidden {
+	display: none;
+}
+/**************************************************************************************************************************************************************/
+/**************************************************************************************************************************************************************/
+/**************************************************************************************************************************************************************/
+/**************************************************************************************************************************************************************/
+/*
+	awesome buttons are based on a blog post by ZERB
+	Read there blog post for more information:
+	"Super awesome Buttons with CSS3 and RGBA":http://www.zurb.com/article/266/super-awesome-buttons-with-css3-and-rgba
+
+	this buttons are even more awesome, as the need only one color for all three states,
+	and have an super awesome onclick state
+*/
+
+/* set an awesome color for the buttons, feel free to add new colors like an .awesome.green or .awesome.secondary */
+.awesome {
+	background-color: #111 !important;
+	color: #fff !important;
+}
+.awesome.green {
+	background-color: #1d4088 !important;
+	font-size: 20px !important;
+	padding: 10px 15px !important;
+}
+/* the awesome size gets set here. Feel free to add new sizes, like .awesome.small or .small.large */
+.awesome { padding: 5px 10px 6px !important; font-size: 13px !important; }
+.awesome:active { padding: 6px 10px 5px !important; }
+
+/* Touch the rest at your onw risk. */
+.awesome {
+	border: 0 !important;
+	cursor: pointer !important;
+	font-style: normal !important;
+	font-weight: bold !important;
+	font: inherit !important;
+	line-height: 1 !important;
+	position: relative !important;
+	text-align: center !important;
+	text-decoration: none !important;
+
+	/* vertical margin is the opposite of button's awesomeness */
+	margin-top: 0 !important;
+	margin-bottom: 0 !important;
+
+	/* not all browser support these, but who cares? */
+	text-shadow: 0 -1px 1px rgba(0,0,0,0.25), -2px 0 1px rgba(0,0,0,0.25) !important;
+
+			border-radius: 5px !important;
+	 -moz-border-radius: 5px !important;
+	-webkit-border-radius: 5px !important;
+			box-shadow: 0 1px 2px rgba(0,0,0,0.5) !important;
+	 -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.5) !important;
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.5) !important;
+
+	/* who needs images these days? */
+	background-image: -moz-linear-gradient(top, rgba(255,255,255,.2), rgba(150,150,150,.2), rgba(0,0,0,.0)) !important;
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255,255,255,.2)), color-stop(0.5, rgba(150,150,150,.2)), to(rgba(0,0,0,.0))) !important;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#30ffffff,endColorstr=#10000000) progid:DXImageTransform.Microsoft.Shadow(color=#000000,direction=135,strength=2);
+
+	/* cross browser inline block hack
+	 see http://blog.mozilla.com/webdev/2009/02/20/cross-browser-inline-block/ */
+	display: -moz-inline-stack;
+	display: inline-block;
+	vertical-align: middle !important;
+	*display: inline !important;
+	position: relative;
+
+	/* IE luv */
+	zoom: 1;
+
+	/* disable text selection (Firefox only) */
+	-moz-user-select: none;
+}
+
+/* OPERA only if there is no border set, Opera shows a transparent background-color if border-radius is set. */
+@media all and (-webkit-min-device-pixel-ratio:10000),not all and (-webkit-min-device-pixel-ratio:0) {
+	input.awesome {
+	border: 1px solid RGBa(0,0,0,0) !important;
+	}
+}
+/* hide selection background color */
+.awesome::selection {
+	background: transparent;
+}
+.awesome {
+	outline: 0; /* remove dotted line, works for links only */
+}
+.awesome::-moz-focus-inner {
+	border: none; /* remove dotted lines for buttons */
+}
+.awesome:focus,
+.awesome:hover {
+	background-image: -moz-linear-gradient(top, rgba(255,255,255,.4), rgba(150,150,150,.3), rgba(0,0,0,.0)) !important;
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255,255,255,.4)), color-stop(0.5, rgba(150,150,150,.3)), to(rgba(0,0,0,.0))) !important;
+	#filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#50ffffff,endColorstr=#20000000) progid:DXImageTransform.Microsoft.Shadow(color=#000000,direction=135,strength=2);
+}
+.awesome:active {
+	background-image: -moz-linear-gradient(top, rgba(0,0,0,.2), rgba(150,150,150,.2), rgba(255,255,255,.2)) !important;
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(0,0,0,.2)), color-stop(0.5, rgba(150,150,150,.2)), to(rgba(255,255,255,.2))) !important;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#20000000,endColorstr=#50ffffff) progid:DXImageTransform.Microsoft.Shadow(color=#000000,direction=315,strength=1);
+
+			box-shadow: inset 0 1px 2px rgba(0,0,0,0.7) !important;
+	 -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.7) !important;
+	-webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.7) !important;
+}
+/* Safari doesn't support inset box shadow, so we better remove it */
+@media screen and (-webkit-min-device-pixel-ratio:0){
+	.awesome:active {
+	-webkit-box-shadow: none;
+	}
+}
+/**************************************************************************************************************************************************************/
+/**************************************************************************************************************************************************************/
+/**************************************************************************************************************************************************************/
+/**************************************************************************************************************************************************************/
+/*
+Copyright 2010 Mike Brevoort http://mike.brevoort.com @mbrevoort
+
+v1.0 jquery-facebook-multi-friend-selector
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+	http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+#jfmfs-friend-selector input {
+	margin: 2px 0;
+	padding: 2px 4px;
+	border: 1px solid #ccc;
+	background-color: #fcfcfc;
+	font-size: 11px;
+}
+.jfmfs-friend {
+	cursor:pointer;
+	display:block;
+	float:left;
+	height:52px;
+	margin: 3px 7px 3px 3px;
+	padding:4px;
+	width:150px;
+	border: 1px solid #FFFFFF;
+	-moz-border-radius: 5px; 
+	-webkit-border-radius: 5px;
+}
+.jfmfs-friend img {
+	border: 1px solid #CCC;
+	float:left;
+	margin:0;
+}
+.jfmfs-friend.selected img {
+	border: 1px solid #233E75;
+}
+.jfmfs-friend div {
+	color:#111111;
+	font-size:12px;
+	overflow:hidden;
+	padding:2px 0 0 6px;
+	width:62px;
+}
+#jfmfs-container {
+	height:300px;
+}
+#jfmfs-friend-container {
+	overflow:scroll;
+	overflow-x: hidden;
+	-ms-overflow-x: hidden;
+	width:100%;
+	height:300px;	
+	color: #333;
+	font-size: 12px;
+}
+#jfmfs-friend-selector {
+	height: 300px;
+	margin: 10px;
+	width: 705px;
+}
+#jfmfs-inner-header {
+	color:#3B5998;
+	font-size:11px;
+	font-weight:bold;
+	height:25px;
+	padding:2px;
+}
+.jfmfs-friend.selected {
+	background-color: #3B5998;
+	border: 1px solid #3B5998;
+	
+	background: #6D84B4; /* for non-css3 browsers */
+
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#233E75', endColorstr='#6D84B4'); /* for IE */
+	background: -webkit-gradient(linear, left top, left bottom, from(#233E75), to(#6D84B4)); /* for webkit browsers */
+	background: -moz-linear-gradient(top,	#233E75,	#6D84B4); /* for firefox 3.6+ */	
+}
+.jfmfs-friend.selected div {
+	color: #FFFFFF;
+}
+.hover {
+	background-color: #EFF2F7;
+}
+.hide-non-selected, .hide-filtered {
+	display: none;
+}
+div.jfmfs-button {
+	background:none repeat scroll 0 0 #6D84B4;
+	border:1px solid #3B5998;
+	color:white;
+	cursor:pointer;
+	margin:4px 5px 0 4px;
+	padding:2px 5px;
+	text-decoration:none;
+}
+#jfmfs-friend-selector a.filter-link:link, a.filter-link:visited {
+	color: #3B5998;
+	font-weight: bold;
+	text-decoration: none;
+}
+#jfmfs-friend-selector a.filter-link:hover, #jfmfs-friend-selector a.selected {
+	-moz-border-radius: 5px; 
+	-webkit-border-radius: 5px;
+	color: #FFFFFF;
+	background-color: #6D84B4;
+}
+#jfmfs-friend-selector .filter-link {
+	margin:4px 5px 4px 5px;
+	padding:3px 5px 3px 5px;
+}
+#jfmfs-inner-header .filter-link {
+	float:right;
+}
+#jfmfs-inner-header div.jfmfs-button-hover {
+	text-decoration: underline;
+}
+#jfmfs-friend-filter-text {
+	height: 23px;
+}
+#jfmfs-inner-header span.jfmfs-title {
+	color: #333333;
+	font-weight: bold;
+	margin: 3px 0 2px;
+}
+#jfmfs-max-selected-wrapper {
+	float: right;
+	margin:4px 5px 4px 5px;
+	padding:3px 5px 3px 5px;	
+}
+/**************************************************************************************************************************************************************/
+/**************************************************************************************************************************************************************/
+/**************************************************************************************************************************************************************/
+/**************************************************************************************************************************************************************/
+/**************************************************************************************************************************************************************/
+/**************************************************************************************************************************************************************/
+/**************************************************************************************************************************************************************/
+/**************************************************************************************************************************************************************/
+/**************************************************************************************************************************************************************/
+/**************************************************************************************************************************************************************/
+/**************************************************************************************************************************************************************/
+/**************************************************************************************************************************************************************/
+#doc {
+	width: 758px;
+	margin: 0 auto;
+}
+.hd, .ft {
+	margin: 0px;
+	padding: 0px;
+}
+.bd {
+	min-height: 540px;
+}
+.fbbd {
+	min-height: 540px;
+	padding: 30px 15px;
+	background: #ffffff;
+}
+.promo {
+	cursor: pointer;
+	background: url("/welcome.jpg");
+}
+.center {
+	width: 100%;
+	padding: 0;
+	margin: 10px auto;
+	text-align: center;
+}
+.like-button {
+	text-align: center;
+}
+.choice {
+	width: 225px;
+	height: 50px;
+}
+.choice .seltext {
+	color: #000000;
+}
+.choice img {
+	margin-bottom: -10px;
+}
+.choices li {
+	float: left;
+	padding: 10px;
+	margin: 5px 5px 5px 5px;
+	border: 1px solid #000000;
+}
+.message {
+	height: 50px;
+	margin: 0px;
+	padding: 0 10px;
+	font-size: 13px;
+	font-weight: bold;
+}
+.message.error, .message .oops, .message .doops, .message .intro {
+	color: #fff;
+	display: none;
+	padding: 5px 0;
+	text-align: center;
+	background-color: #e8352d;
+}
+.message.success {
+	color: #333;
+	background-color: #79ff69;
+}
+.close-button {
+	width: 16px;
+	height: 16px;
+	z-index: 100;
+	cursor: pointer;
+	margin: -25px 0 0 150px;
+}
+.close-button img {
+	margin: 0 0 0 -5px;
+}
+.picktitle {
+	width: 100%;
+	margin: -15px 0 25px 0;
+	padding: 0 0 15px 0;
+	text-align: center;
+	font-size: 11px;
+	font-weight: bold;
+}
+.rating .label {
+	font-size: 35px;
+	font-weight: bold;
+}
+.rating .status {
+	font-weight: normal;
+}
+.rating .rate {
+	font-size: 200px;
+	line-height: 200px;
+}
+.rating .rating0 {
+	color: #ED1C24;
+}
+.rating .rating14 {
+	color: #39B54A;
+}
+.rating .rating50 {
+	color: #EC008C;
+}
+.invite {
+	margin: 50px 0 0 0;
+}
+.invite .label {
+	font-weight: bold;
+}
+.invite .text {
+	font-size: 17px;
+}

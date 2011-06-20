@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Ratings!{% endblock %}
+
+{% block body %}
+<div id="fbbd">
+	<div class="center rating">
+		<table>
+		{% for name, rank in netas.items %}
+			<tr>
+				<td>{{ forloop.counter }}</td>
+				<td><a href="">{{ name }}</a></td>
+				<td><a href="">{{ rank }}</a></td>
+			</tr>
+		{% endfor %}
+		</table>
+	</div>
+	<div class="center invite">
+		<p class="text">What are you waiting for!</p>
+		<p class="label">Invite more friends and share the excitement.</p>
+		<div class="center">
+		  <input class="awesome green" type="submit" value="Invite!">
+		</div>
+	</div>
+</div>
+{% endblock %}
